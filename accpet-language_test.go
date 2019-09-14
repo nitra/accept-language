@@ -10,4 +10,9 @@ func TestLanguage(t *testing.T) {
 	if lang != expected {
 		t.Errorf("Lang incorrect, got: %s, want: %s.", lang, expected)
 	}
+
+	lang = Language("https://nitra.ua")
+	if lang != expected {
+		t.Errorf("Lang incorrect, got: %s, want: %s.", lang, expected)
+	}
 }
