@@ -1,8 +1,29 @@
 package accept
 
 import (
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
 	"net/url"
+	"os"
 )
+
+var byTLD map[string]string
+
+func init() {
+	// Open our jsonFile
+	jsonFile, err := os.Open("main.json")
+	// if we os.Open returns an error then handle it
+	if err != nil {
+		fmt.Println(err)
+	}
+	// defer the closing of our jsonFile so that we can parse it later on
+	defer jsonFile.Close()
+	byteValue, _ := ioutil.ReadAll(jsonFile)
+
+	json.Unmarshal([]byte(byteValue), &byTLD)
+	fmt.Println(byTLD["ua"])
+}
 
 // Language preferred language value by domain TLD
 func Language(domain string) string {
@@ -16,7 +37,7 @@ func Language(domain string) string {
 	result := ""
 	countryTLD := domain[len(domain)-3:]
 	if countryTLD == ".ua" {
-		result = "uk-UA, uk;q=0.9, ru;q=0.8, *;q=0.5"
+		result = byTLD["ua"]
 	}
 
 	return result
