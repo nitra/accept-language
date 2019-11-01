@@ -6,4 +6,4 @@ accept-language preferred value by domain TLD
 
 ## golang
 
-go test
+go test -domain=nitra.ua

@@ -33,6 +33,11 @@ func init() {
 // Language preferred language value by domain TLD
 func Language(domain string) string {
 
+	if len(domain) < 3 {
+		log.Print("very short domain")
+		return ""
+	}
+
 	// tests a string to determine if it is a url or not.
 	u, err := url.ParseRequestURI(domain)
 	if err == nil {
